@@ -5,12 +5,16 @@ const path = require('path');
 const db = require('./config/mongooseConnection');
 const router = express.Router();
 
+const {generateToken} = require('./utils/generateToken')
+
 
 app.use(express.json());
 app.use(express.urlencoded({extended: true}));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 app.set('view engine', 'ejs');
+
+require('dotenv').config();
 
 const ownersRouter = require('./routes/ownersRouter');
 const usersRouter = require('./routes/usersRouter');
