@@ -7,7 +7,7 @@ const router = express.Router();
 const expressSession = require('express-session');
 const flash = require('connect-flash');
 
-const {generateToken} = require('./utils/generateToken')
+// const {generateToken} = require('./utils/generateToken')
 
 require('dotenv').config();
 
@@ -31,12 +31,11 @@ const ownersRouter = require('./routes/ownersRouter');
 const usersRouter = require('./routes/usersRouter');
 const productsRouter = require('./routes/productsRouter');
 
+
 app.use('/', indexRouter);
 app.use('/owners', ownersRouter);
 app.use('/users', usersRouter);
 app.use('/products', productsRouter);
-
-
 
 
 

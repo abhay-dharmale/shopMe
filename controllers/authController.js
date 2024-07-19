@@ -5,7 +5,7 @@ const { generateToken } = require("../utils/generateToken");
 
 module.exports.registerUser = async(req, res) => {
     try {
-      let { fullName, email, password } = req.body;
+      let { fullname, email, password } = req.body;
 
       let user = await userModel.findOne({email: email})
       if(user) return res.status(400).send('email already exists');
@@ -15,7 +15,7 @@ module.exports.registerUser = async(req, res) => {
           if (err) return res.send(err.message);
           else {
             let user = await userModel.create({
-              fullName,
+              fullname,
               email,
               password:hash,
             });
@@ -41,10 +41,15 @@ module.exports.loginUser = async(req, res) => {
             if(result){
                 let token = generateToken(user)
                 res.cookie("token", token);
-                res.send('Logged in successfully');
+                res.redirect('/shop');
             }else{
                 res.status(400).send('Email or password incorrect');
             }
         })
     }
 }
+
+module.exports.logoutUser = (req, res) => {
+  res.cookie("token", "");
+  res.redirect("/");
+};

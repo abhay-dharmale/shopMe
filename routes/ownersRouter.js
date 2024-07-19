@@ -2,9 +2,25 @@ const express = require('express');
 const router = express.Router();
 const ownerModel = require('../models/ownerModel');
 
-router.get('/', (req, res) => {
-  res.send('Welcome');
-})
+const success = [
+  {
+      name: 'Product 1',
+      price: 1000,
+      image: Buffer.from('base64string', 'base64'), // Replace 'base64string' with actual base64 image data
+      bgcolor: '#333',
+      panelcolor: '#f8f8f8',
+      textcolor: '#333333'
+  },
+  {
+      name: 'Product 2',
+      price: 2000,
+      image: Buffer.from('base64string', 'base64'),
+      bgcolor: '#222',
+      panelcolor: '#f8f8f8',
+      textcolor: '#333333'
+  }
+  // Add more products as needed
+];
 
 if(process.env.NODE_ENV === 'development'){
   router.post('/create', async(req, res) => {
@@ -23,5 +39,9 @@ if(process.env.NODE_ENV === 'development'){
     res.status(201).send(createdowner);
   })
 }
+
+router.get('/admin', (req, res) => {
+  res.render('createproducts', {success});
+})
 
 module.exports = router;
