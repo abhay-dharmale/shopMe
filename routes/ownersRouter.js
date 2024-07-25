@@ -2,25 +2,6 @@ const express = require('express');
 const router = express.Router();
 const ownerModel = require('../models/ownerModel');
 
-const success = [
-  {
-      name: 'Product 1',
-      price: 1000,
-      image: Buffer.from('base64string', 'base64'), // Replace 'base64string' with actual base64 image data
-      bgcolor: '#333',
-      panelcolor: '#f8f8f8',
-      textcolor: '#333333'
-  },
-  {
-      name: 'Product 2',
-      price: 2000,
-      image: Buffer.from('base64string', 'base64'),
-      bgcolor: '#222',
-      panelcolor: '#f8f8f8',
-      textcolor: '#333333'
-  }
-  // Add more products as needed
-];
 
 if(process.env.NODE_ENV === 'development'){
   router.post('/create', async(req, res) => {
@@ -41,7 +22,7 @@ if(process.env.NODE_ENV === 'development'){
 }
 
 router.get('/admin', (req, res) => {
-  res.render('createproducts', {success});
+  res.render('createproducts');
 })
 
 module.exports = router;
