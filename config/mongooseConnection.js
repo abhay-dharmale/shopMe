@@ -1,13 +1,34 @@
-const mongoose = require('mongoose')
-const dbgr = require('debug')('development:mongoose');
-const config = require('config');
+// const mongoose = require('mongoose')
+// const dbgr = require('debug')('development:mongoose');
+// const config = require('config');
+// require('dotenv').config();
 
-mongoose.connect(`${config.get('MONGODB_URI')}/shopMe`)
+// mongoose.connect(`${config.get(process.env.MONGO_URI)}/shopMe`)
+// .then(() => {
+//   dbgr('connected')
+// })
+// .catch((err)=>{
+//   dbgr(err);
+// })
+
+// module.exports = mongoose.connection;
+
+const mongoose = require('mongoose');
+const dbgr = require('debug')('development:mongoose');
+require('dotenv').config();
+
+// Directly use process.env to access the MONGO_URI environment variable
+const mongoURI = process.env.MONGO_URI;
+
+mongoose.connect(`${mongoURI}/shopMe`, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
 .then(() => {
-  dbgr('connected')
+  dbgr('connected to MongoDB');
 })
-.catch((err)=>{
-  dbgr(err);
-})
+.catch((err) => {
+  dbgr('MongoDB connection error:', err);
+});
 
 module.exports = mongoose.connection;

@@ -7,9 +7,25 @@
     <title>Document</title>
     <link href="https://cdn.jsdelivr.net/npm/remixicon@4.2.0/fonts/remixicon.css" rel="stylesheet" />
     <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .glassmorphism {
+            background: rgba(255, 255, 255, 0.2); 
+            backdrop-filter: blur(10px); 
+            -webkit-backdrop-filter: blur(10px); 
+        }
+    </style>
 </head>
 
-<body class="font-['helvetica_now_display']">
-    <nav class="w-full fixed top-0 left-0 px-5 py-3">
-        <h3 class="text-xl">Scatch</h3>
+<body class="font-['helvetica_now_display'] ">
+    <nav class="w-full fixed top-0 left-0 px-5 py-3 flex justify-between glassmorphism">
+        <h3 class="text-xl">ShopMe</h3>
+        <% var loggedin = typeof loggedin !== 'undefined' ? loggedin : 'true' %>
+        <% if(loggedin){ %>
+            <div class="flex gap-5">
+                <a href="/shop">Shop</a>
+                <a href="/cart">Cart</a>
+                <!-- <a href="">My Account</a> -->
+                <a class="text-red-600" href="/users/logout">Logout</a>
+            </div>
+        <% } %> 
     </nav>
